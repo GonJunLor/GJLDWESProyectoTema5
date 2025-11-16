@@ -13,6 +13,11 @@ create table if not exists DBGJLDWESProyectoTema5.T02_Departamento(
     T02_FechaBajaDepartamento datetime null
 )engine=innodb;
 
+create table if not exists DBGJLDWESProyectoTema5.Usuario(
+    nombre varchar(100) not null primary key,
+    contrasena varchar(64) not null
+)engine=innodb;
+
 create user if not exists 'userGJLDWESProyectoTema5'@'%' identified by '5813Libro-Puro';
 -- create user if not exists 'userGJLDWESProyectoTema5'@'%' identified by 'paso';
 
