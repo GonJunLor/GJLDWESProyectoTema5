@@ -19,8 +19,6 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
 
     // Mostrar mensaje si damos a cancelar
     echo '<h1>Acceso denegado. Se requiere autenticación.</h1>';
-    echo '<p>'.$_SERVER['PHP_AUTH_USER'].'</p>';
-    echo '<p>'.$_SERVER['PHP_AUTH_PW'].'</p>';
     exit;
 
 } else { // Si ya ha enviado las credenciales, las comprobamos con la base de datos
