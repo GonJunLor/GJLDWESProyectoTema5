@@ -8,6 +8,11 @@
 // importamos el archivo con los datos de conexión
 require_once '../conf/confDBPDO.php';
 
+// codificamos la contraseña para guardarla en la bbdd
+// $codificarContraseña = password_hash("adminpaso",PASSWORD_DEFAULT);
+
+$comporobar = password_verify('adminpaso','$2y$10$AZurnSfl5Z/bqMVixkrV1uUUt4sbGXxfdtz3JAJBok1qKd.0rZ1la');
+
 // Variable para comprobar si el usuario es válido
 $usuarioValido = false;
 
@@ -24,18 +29,32 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
 } else { // Si ya ha enviado las credenciales, las comprobamos con la base de datos
     
     try {
-        $usuarioPassword = $_SERVER['PHP_AUTH_USER'].$_SERVER['PHP_AUTH_PW'];
-
         // Conectamos a la base de datos
         $miDB = new PDO(DSN,USERNAME,PASSWORD);
 
+        // Guardamos los datos del usuario
+        $usuarioRecibido = $_SERVER['PHP_AUTH_USER'];
+        $contrasenaRecibida = $_SERVER['PHP_AUTH_PW'];
+        $usuarioContrasena = $usuarioRecibido.$contrasenaRecibida;
+
+        /**
+         * cifrado: Nombre del algoritmo de hachado seleccionado (por ejemplo: "sha256"). Para una 
+         *          lista de los algoritmos soportados ver hash_algos().
+         * datos: Mensaje a cifrar.
+         * binary: Cuando vale true, la salida será datos binarios sin tratar. Cuando vale false, 
+         *         la salida será dígitos hexadecimales en minúscula.
+         */
+        $contrasenaCodificada = hash("sha256",$usuarioContrasena,false);
+        // codificamos la contraseña con sha256 para compararla con la bbdd
+
         // Consulta preparada: Busca un usuario y contraseña coincidentes
-        $sql = "SELECT * FROM T01_Usuario WHERE T01_CodUsuario = :usuario AND T01_Password = sha2(:contras,256)";
+        $sql = "SELECT nombre FROM Usuario WHERE nombre = :usuario AND contrasena = :contras";
         $consulta = $miDB->prepare($sql);
-        $consulta->execute([
-            ':usuario' => $_SERVER['PHP_AUTH_USER'],
-            ':contras' => $usuarioPassword
-        ]);
+        
+        // Bindea los parámetros de autenticación recibidos
+        $consulta->bindParam(':usuario', $usuarioRecibido);
+        $consulta->bindParam(':contras', $contrasenaCodificada);
+        $consulta->execute();
         
         // Si encuentra una fila, las credenciales son correctas
         $resultado = $consulta->rowCount();
@@ -43,9 +62,25 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
             $usuarioValido = true;
         }
 
+        // *********************************************************
+        // Otra forma de hacer la comprobación pero con las funciones password_hash y password_verify
+        // *********************************************************
+        // password_hash tiene la particularidad de que crea resumen distintos para la misma contraseña cada vez que 
+        // se ejecuta, aun así password_verify sabe que es correcta.
+        /* 
+        $sql = "SELECT contrasena FROM Usuario WHERE nombre = :usuario"; 
+        $consulta = $miDB->prepare($sql);
+        $consulta->bindParam(':usuario', $usuarioRecibido);
+        $consulta->execute();
+        $hashAlmacenado = $consulta->fetchColumn(); 
+
+        if ($hashAlmacenado && password_verify($usuarioContrasena, $hashAlmacenado)) {
+            $autenticado = true; // ¡Credenciales correctas!
+        }
+        */
     } catch (PDOException $miExceptionPDO) {
         // temporalmente ponemos estos errores para que se muestren en pantalla
-        echo 'Error: '.$miExceptionPDO->getMessage().'con código de error: '.$miExceptionPDO->getCode();
+        $aErrores['CodDepartamentoGuardar']= 'Error: '.$miExceptionPDO->getMessage().'con código de error: '.$miExceptionPDO->getCode();
     } finally {
         unset($miDB);
     }   

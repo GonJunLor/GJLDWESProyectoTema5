@@ -1,3 +1,26 @@
+<?php
+/**
+* @author: Gonzalo Junquera Lorenzo
+* @since: 16/11/2025
+* 1. Desarrollo de un control de acceso con identificación del usuario basado en la función header().
+*/
+
+// Verificar si se han enviado credenciales con isset. Y si son correctas
+if (!isset($_SERVER['PHP_AUTH_USER']) ||
+    $_SERVER['PHP_AUTH_USER'] != 'admin' || 
+    $_SERVER['PHP_AUTH_PW'] != 'paso'){
+    // Enviar encabezado de autenticación para solicitar credenciales
+    header('WWW-Authenticate: Basic realm="Contenido restringido"');
+
+    header('HTTP/1.0 401 Unauthorized');
+    
+    // Mostrar mensaje si damos a cancelar
+    echo '<h1>Acceso denegado. Se requiere autenticación.</h1>';
+    exit;
+} 
+
+// Si llega aquí, la autenticación fue exitosa.
+?>
 <!DOCTYPE html>
 <html lang="es">
 <body>
@@ -8,17 +31,13 @@
         <h2>Gonzalo Junquera Lorenzo</h2>
     </nav>
     <main>
-       <?php
-       /**
-        * @author: Gonzalo Junquera Lorenzo
-        * @since: 16/11/2025
-        * 1. Desarrollo de un control de acceso con identificación del usuario basado en la función header().
-        */
-        // importamos el archivo con los datos de conexión
-        require_once '../conf/confDBPDO.php';
-    
-       
-       ?>
+        <h2>Acceso correcto</h2>
+        <p>
+            Has accedido como: <strong><?php echo $_SERVER['PHP_AUTH_USER']; ?></strong>
+        </p>
+        <p>
+            Con la contraseña: <strong><?php echo $_SERVER['PHP_AUTH_PW']; ?></strong>
+        </p>
     </main>
 </body>
 <head>
