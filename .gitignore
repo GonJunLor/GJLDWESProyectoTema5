@@ -1,1 +1,5 @@
 .vscode/
+conf/confDBPDO.php
+scriptBD/BorraDBGJLDWESProyectoTema5.sql
+scriptBD/CargaInicialDBGJLDWESProyectoTema5.sql
+scriptBD/CreaDBGJLDWESProyectoTema5.sql
