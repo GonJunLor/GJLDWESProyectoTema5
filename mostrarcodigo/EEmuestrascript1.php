@@ -15,7 +15,7 @@
     </nav>
     <main>
        <?php 
-        highlight_file("../scriptBD/CreaDBGJLDWESProyectoTema5.sql"); 
+        highlight_file("../scriptBD/EECreaDBGJLDWESProyectoTema5.sql"); 
        ?>
     </main>
 </body>
