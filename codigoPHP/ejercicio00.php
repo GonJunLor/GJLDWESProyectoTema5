@@ -1,5 +1,122 @@
 <!DOCTYPE html>
 <html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="../webroot/media/favicon/favicon-32x32.png">
+    <title>Gonzalo Junquera Lorenzo</title>
+    <style>
+        :root {
+            --colorFondo1: #ffffff;
+            --colorFondo2: #f3f3f3;
+            --colorFondo3: #bfc9cd;
+            --colorFondo4: black;
+        
+            --colorBorde: #c5c5c5;
+            --radioBorde: 6px;
+            --anchoBorde: 1px;
+        
+            --colorTexto: #000000;
+            --tamanoTexto: 16px;
+            --fuenteTexto1: Sofia,sans-serif;
+            --fuenteTexto2: Arial,sans-serif;
+
+            --anchoArticulo: 18vw;
+            --altoArticulo: 26vw;
+            --altoSuperpuesto: 20vw;
+        }
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: var(--fuenteTexto2);
+        }
+
+        /* Barra superior*/
+        #aviso{
+            background-color: var(--colorFondo4);
+            color: white;
+            text-align: center;
+            font-size: 0.7em;
+            letter-spacing: 1px;
+            padding: 10px;
+        }
+        nav{
+            background-color: var(--colorFondo1);
+            border-bottom: var(--colorBorde) solid var(--anchoBorde);
+            padding: 15px 18px;
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        /* Cabecera */
+        body>header{
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 60vh;
+            display: flex;
+            flex-direction: row;
+            align-items:end;
+        }
+        h1{
+            color: rgba(0, 0, 0, 0.247);
+            -webkit-text-stroke: 2px white;
+            font-size: 3em;
+            text-transform: uppercase;
+            margin-left: 5%;
+            margin-bottom: 10%;
+            width: 13em;
+        }
+        main>h3{
+            text-align: center;
+            padding: 1em;
+            margin-top: 2em;
+        }
+        main{
+            margin: 20px 20px 20px 20px;
+        }
+        table{
+            border-collapse: collapse;
+            width: 100%;
+            table-layout: fixed;
+            overflow: auto;
+        }
+        th{
+            background-color: gainsboro;
+            border: 1px solid black;
+            padding: 3px;
+        }
+        td{
+            border: 1px solid black;
+            padding: 3px;
+            /* word-break: break-all; */
+            overflow-wrap: break-word;
+        }
+        tr td:first-child{
+            background-color: #8db7faff;
+            font-weight: bold;
+        }
+        tr td:first-child, th:first-child{width: 30%;}
+        tr td:nth-of-type(2), th:nth-of-type(2){width: 69%;}
+        h3{
+            text-align: center;
+            margin: 10px;
+        }
+        body {
+            background-color: white !important; /* Fuerza el fondo a blanco */
+            color: black !important; /* Fuerza el texto a negro */
+        }
+        #phpinfo{
+            background-color: white; 
+            color: black;
+        }
+        #phpinfo .v{background-color: white;}
+        #phpinfo .e{background-color: #8db7faff;}
+    </style>
+</head>
 <body>
     <div id="aviso">CURSO 2025/2026 -- DAW 2 -- I.E.S. LOS SAUCES</div>
     <nav>
@@ -151,122 +268,4 @@
         ?>
     </main>
 </body>
-<head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="../webroot/media/favicon/favicon-32x32.png">
-    <!-- <link rel="stylesheet" href="../webroot/css/estilos.css"> -->
-    <title>Gonzalo Junquera Lorenzo</title>
-    <style>
-        :root {
-            --colorFondo1: #ffffff;
-            --colorFondo2: #f3f3f3;
-            --colorFondo3: #bfc9cd;
-            --colorFondo4: black;
-        
-            --colorBorde: #c5c5c5;
-            --radioBorde: 6px;
-            --anchoBorde: 1px;
-        
-            --colorTexto: #000000;
-            --tamanoTexto: 16px;
-            --fuenteTexto1: Sofia,sans-serif;
-            --fuenteTexto2: Arial,sans-serif;
-
-            --anchoArticulo: 18vw;
-            --altoArticulo: 26vw;
-            --altoSuperpuesto: 20vw;
-        }
-        *{
-            padding: 0;
-            margin: 0;
-            font-family: var(--fuenteTexto2);
-        }
-
-        /* Barra superior*/
-        #aviso{
-            background-color: var(--colorFondo4);
-            color: white;
-            text-align: center;
-            font-size: 0.7em;
-            letter-spacing: 1px;
-            padding: 10px;
-        }
-        nav{
-            background-color: var(--colorFondo1);
-            border-bottom: var(--colorBorde) solid var(--anchoBorde);
-            padding: 15px 18px;
-            position: sticky;
-            top: 0;
-            z-index: 2000;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-        }
-
-        /* Cabecera */
-        body>header{
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 60vh;
-            display: flex;
-            flex-direction: row;
-            align-items:end;
-        }
-        h1{
-            color: rgba(0, 0, 0, 0.247);
-            -webkit-text-stroke: 2px white;
-            font-size: 3em;
-            text-transform: uppercase;
-            margin-left: 5%;
-            margin-bottom: 10%;
-            width: 13em;
-        }
-        main>h3{
-            text-align: center;
-            padding: 1em;
-            margin-top: 2em;
-        }
-        main{
-            margin: 20px 20px 20px 20px;
-        }
-        table{
-            border-collapse: collapse;
-            width: 100%;
-            table-layout: fixed;
-            overflow: auto;
-        }
-        th{
-            background-color: gainsboro;
-            border: 1px solid black;
-            padding: 3px;
-        }
-        td{
-            border: 1px solid black;
-            padding: 3px;
-            /* word-break: break-all; */
-            overflow-wrap: break-word;
-        }
-        tr td:first-child{
-            background-color: #8db7faff;
-            font-weight: bold;
-        }
-        tr td:first-child, th:first-child{width: 30%;}
-        tr td:nth-of-type(2), th:nth-of-type(2){width: 69%;}
-        h3{
-            text-align: center;
-            margin: 10px;
-        }
-        body {
-            background-color: white !important; /* Fuerza el fondo a blanco */
-            color: black !important; /* Fuerza el texto a negro */
-        }
-        #phpinfo{
-            background-color: white; 
-            color: black;
-        }
-        #phpinfo .v{background-color: white;}
-        #phpinfo .e{background-color: #8db7faff;}
-    </style>
-</head>
 </html>
